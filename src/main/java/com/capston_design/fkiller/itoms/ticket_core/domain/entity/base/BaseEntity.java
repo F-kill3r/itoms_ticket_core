@@ -1,4 +1,4 @@
-package com.capston_design.fkiller.itoms.ticket_core.entity.base;
+package com.capston_design.fkiller.itoms.ticket_core.domain.entity.base;
 
 
 import jakarta.persistence.Column;
@@ -23,6 +23,5 @@ public class BaseEntity {
     @LastModifiedDate
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
-
 
 }
