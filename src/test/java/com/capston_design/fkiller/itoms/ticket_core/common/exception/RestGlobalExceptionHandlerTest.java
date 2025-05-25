@@ -1,6 +1,5 @@
 package com.capston_design.fkiller.itoms.ticket_core.common.exception;
 
-import com.capston_design.fkiller.itoms.ticket_core.common.exception.dto.DetailErrorDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,12 +18,13 @@ class RestGlobalExceptionHandlerTest {
     @Autowired
     private MockMvc mockMvc;
 
+
     @Test
     void 핸들러에_detail_없이_예외발생 ()  throws Exception {
         // when
         mockMvc.perform(MockMvcRequestBuilders.get("/test/exception"))
                 .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(jsonPath("$.message").value("예외 발생"))
+                .andExpect(jsonPath("$.message").value(new IllegalStateException().getMessage()))
                 .andExpect(jsonPath("$.detail").doesNotExist());
     }
 
