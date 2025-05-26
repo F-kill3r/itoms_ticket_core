@@ -21,5 +21,4 @@ public class TestController {
     public ResponseEntity<Void> testExceptionWithDetail() {
         throw createBaseExceptionWithDetail(HttpStatus.BAD_REQUEST, "예외 발생", new DetailErrorDTO("12", "티켓 전송 중 오류 발생"));
     }
-    Unhandled exception: com.capston_design.fkiller.itoms.ticket_core.common.exception.BaseException
 }

@@ -24,7 +24,7 @@ class RestGlobalExceptionHandlerTest {
         // when
         mockMvc.perform(MockMvcRequestBuilders.get("/test/exception"))
                 .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(jsonPath("$.message").value(new IllegalStateException().getMessage()))
+                .andExpect(jsonPath("$.message").value("예외 발생"))
                 .andExpect(jsonPath("$.detail").doesNotExist());
     }
 
