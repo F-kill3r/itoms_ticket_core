@@ -1,12 +1,11 @@
 package com.capston_design.fkiller.itoms.ticket_core.controller;
 
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -25,5 +24,13 @@ public class TicketController {
     public CreateTicketResponseDTO createTicket(@RequestBody CreateTicketRequestDTO request) {
         UUID ticketId = ticketService.createTicket(request);
         return new CreateTicketResponseDTO(ticketId);
+    }
+    @PatchMapping("/v1/ticket/{id}/assign")
+    public ResponseEntity<Void> assignAcceptor(
+            @PathVariable UUID id,
+            @RequestBody AssignAcceptorRequestDTO request
+    ) {
+        ticketService.assignAcceptor(id, request);
+        return ResponseEntity.ok().build();
     }
 }

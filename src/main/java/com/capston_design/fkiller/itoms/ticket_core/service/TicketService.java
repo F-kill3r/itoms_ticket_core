@@ -1,5 +1,6 @@
 package com.capston_design.fkiller.itoms.ticket_core.service;
 
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
@@ -31,7 +32,12 @@ public class TicketService {
 
         return ticketRepository.save(initTicket).getId();
     }
+    @Transactional
+    public void assignAcceptor(UUID ticketId, AssignAcceptorRequestDTO dto) {
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new IllegalArgumentException("티켓을 찾을 수 없습니다."));
 
-
-
+        ticket.updateAcceptor(dto.getAcceptorId(), dto.getAcceptorName());
+        ticketRepository.save(ticket);
+    }
 }

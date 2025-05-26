@@ -111,4 +111,12 @@ public class Ticket extends BaseEntity {
         this.ticketStatus = ticketStatus;
         this.ticketStatusCode = ticketStatus.getCode();
     }
+    public void updateCreator(String creatorId, String creatorName) {
+        this.creatorId = creatorId;
+        this.creatorName = creatorName;
+    }
+    public void updateAcceptor(String acceptorId, String acceptorName) {
+        this.acceptorId = acceptorId;
+        this.acceptorName = acceptorName;
+    }
 }
