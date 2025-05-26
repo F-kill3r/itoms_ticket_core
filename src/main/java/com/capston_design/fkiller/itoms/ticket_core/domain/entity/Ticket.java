@@ -115,4 +115,8 @@ public class Ticket extends BaseEntity {
         this.creatorId = creatorId;
         this.creatorName = creatorName;
     }
+    public void updateAcceptor(String acceptorId, String acceptorName) {
+        this.acceptorId = acceptorId;
+        this.acceptorName = acceptorName;
+    }
 }
