@@ -13,15 +13,13 @@ class TicketTest {
         String requester_id = "test_requester_id";
         String requester_name = "test_requester_name";
         TicketStatus ticketStatus = TicketStatus.REQUEST_CREATE_TICKET;
-        Ticket baseTicket = Ticket.ofCreateBaseTicket(incident_id, requester_id,requester_name,ticketStatus);
+        Ticket baseTicket = Ticket.ofCreateBaseTicket(incident_id, requester_id,requester_name);
 
         System.out.println("baseTicket.toString() = " + baseTicket.toString());
 
         assertEquals("test_incident_id", baseTicket.getIncidentId());
         assertEquals("test_requester_id", baseTicket.getRequesterId());
         assertEquals("test_requester_name", baseTicket.getRequesterName());
-        assertEquals(1, baseTicket.getTicketStatusCode());
-        assertEquals(TicketStatus.REQUEST_CREATE_TICKET, baseTicket.getTicketStatus());
         assertNull(baseTicket.getCreatorId());
         assertNull(baseTicket.getCreatorName());
 
