@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ServiceDesk
+    name: TicketCore
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL}

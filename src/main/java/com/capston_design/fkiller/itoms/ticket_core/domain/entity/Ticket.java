@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Entity
+@EntityListeners(TicketEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TICKET")
 public class Ticket extends BaseEntity {
@@ -95,14 +96,11 @@ public class Ticket extends BaseEntity {
         this.acceptorName = acceptorName;
     }
 
-    public static Ticket ofCreateBaseTicket(String incidentId, String requesterId, String requesterName,
-                                            TicketStatus ticketStatus){
+    public static Ticket ofCreateBaseTicket(String incidentId, String requesterId, String requesterName){
         return Ticket.builder()
                 .incidentId(incidentId)
                 .requesterId(requesterId)
                 .requesterName(requesterName)
-                .ticketStatus(ticketStatus)
-                .ticketStatusCode(ticketStatus.getCode())
                 .ticketActive(false)
                 .build();
     }
