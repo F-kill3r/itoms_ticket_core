@@ -6,7 +6,7 @@ import org.springframework.lang.Nullable;
 
 @Builder
 @Getter
-public class RestBaseErrorResponse<T> {
+public class RestBaseErrorResponseDTO<T> {
     private String message;
     @Nullable
     private T detail;
