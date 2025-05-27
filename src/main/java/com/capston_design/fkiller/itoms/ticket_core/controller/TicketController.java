@@ -2,6 +2,7 @@ package com.capston_design.fkiller.itoms.ticket_core.controller;
 
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.UpdateTicketRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,14 @@ public class TicketController {
             @RequestBody AssignAcceptorRequestDTO request
     ) {
         ticketService.assignAcceptor(id, request);
+        return ResponseEntity.ok().build();
+    }
+    @PatchMapping("/v1/ticket/{id}")
+    public ResponseEntity<Void> updateTicket(
+            @PathVariable UUID id,
+            @RequestBody UpdateTicketRequestDTO request
+    ) {
+        ticketService.updateTicket(id, request);
         return ResponseEntity.ok().build();
     }
 }

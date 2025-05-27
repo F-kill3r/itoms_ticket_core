@@ -34,8 +34,8 @@ public class UpdateTicketStatusAspect {
         if(updateTicketStatus.taskNotification()){
             Ticket ticket = (Ticket) result;
             ticket.updateTicketStatus(updateTicketStatus.ticketStatus());
+            statusHolder.remove();
         }
-        statusHolder.remove();
     }
 
     public static TicketStatus getStatus() {

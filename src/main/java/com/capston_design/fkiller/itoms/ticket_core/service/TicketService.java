@@ -1,10 +1,7 @@
 package com.capston_design.fkiller.itoms.ticket_core.service;
 
-import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.*;
 import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.UpdateTicketStatus;
-import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignmentCallbackDTO;
-import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
-import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.completeTaskRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
 import com.capston_design.fkiller.itoms.ticket_core.repository.TicketRepository;
@@ -72,5 +69,14 @@ public class TicketService {
         return ticketRepository.findById(request.getTicketId())
                 .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
                         "유효하지 않은 티켓을 요청하였습니다"));
+    }
+    // Todo: Status 추가
+    @Transactional
+    public void updateTicket(UUID ticketId, UpdateTicketRequestDTO request) {
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
+                        "유효하지 않은 티켓을 요청하였습니다"));
+        ticket.updateTicket(request.getTicketName(), request.getTicketContent());
+        ticketRepository.save(ticket);
     }
 }
