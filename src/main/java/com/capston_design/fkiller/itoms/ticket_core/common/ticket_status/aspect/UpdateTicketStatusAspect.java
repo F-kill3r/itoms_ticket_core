@@ -1,9 +1,11 @@
-package com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.aspect;
+package com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.aspect;
 
 import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.UpdateTicketStatus;
+import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -19,13 +21,21 @@ public class UpdateTicketStatusAspect {
     @Before("@annotation(updateTicketStatus)")
     public void beforeMethod(UpdateTicketStatus updateTicketStatus) {
         statusHolder.set(updateTicketStatus.ticketStatus());
-
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
             @Override
             public void afterCompletion(int status) {
                 statusHolder.remove();
             }
         });
+    }
+
+    @AfterReturning(pointcut = "@annotation(updateTicketStatus)", returning = "result")
+    public void afterReturningMethod(UpdateTicketStatus updateTicketStatus, Object result){
+        if(updateTicketStatus.taskNotification()){
+            Ticket ticket = (Ticket) result;
+            ticket.updateTicketStatus(updateTicketStatus.ticketStatus());
+        }
+        statusHolder.remove();
     }
 
     public static TicketStatus getStatus() {

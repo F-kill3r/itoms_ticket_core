@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum TicketStatus {
     REQUEST_CREATE_TICKET(1, "REQUEST", "티켓 생성 요청 상태"),
     COMPLETE_ASSIGN_ACCEPTOR(2, "ASSIGNED", "작업자 할당 완료 상태"),
-    COMPLETE_ASSIGN_CREATOR(3, "CREATED", "티켓 담당자 할당 완료 상태");
+    COMPLETE_ASSIGN_CREATOR(3, "CREATED", "티켓 담당자 할당 완료 상태"),
+    COMPLETE_TASK(5, "IN_PROGRESS", "작업자 특정 작업(Task) 완료 상태");
 
     private int code;
     private String codeName;
