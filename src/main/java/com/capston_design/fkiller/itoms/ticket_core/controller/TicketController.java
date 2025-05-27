@@ -2,7 +2,7 @@ package com.capston_design.fkiller.itoms.ticket_core.controller;
 
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
-import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.UpdateTicketRequestDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.UpdateTicketInfoRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class TicketController {
         UUID ticketId = ticketService.createTicket(request);
         return new CreateTicketResponseDTO(ticketId);
     }
-    @PatchMapping("/v1/ticket/{id}/assign")
+    @PatchMapping("/v1/ticket/{ticketId}/assign")
     public ResponseEntity<Void> assignAcceptor(
             @PathVariable UUID id,
             @RequestBody AssignAcceptorRequestDTO request
@@ -34,12 +34,12 @@ public class TicketController {
         ticketService.assignAcceptor(id, request);
         return ResponseEntity.ok().build();
     }
-    @PatchMapping("/v1/ticket/{id}")
+    @PatchMapping("/v1/ticket/{ticketId}")
     public ResponseEntity<Void> updateTicket(
             @PathVariable UUID id,
-            @RequestBody UpdateTicketRequestDTO request
+            @RequestBody UpdateTicketInfoRequestDTO request
     ) {
-        ticketService.updateTicket(id, request);
+        ticketService.updateTicketInfo(id, request);
         return ResponseEntity.ok().build();
     }
 }

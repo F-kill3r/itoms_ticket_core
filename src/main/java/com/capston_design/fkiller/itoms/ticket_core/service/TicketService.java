@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import static com.capston_design.fkiller.itoms.ticket_core.common.exception.BaseException.createBaseExceptionWithoutDetail;
 
@@ -72,11 +71,11 @@ public class TicketService {
     }
     // Todo: Status 추가
     @Transactional
-    public void updateTicket(UUID ticketId, UpdateTicketRequestDTO request) {
+    public void updateTicketInfo(UUID ticketId, UpdateTicketInfoRequestDTO request) {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
                         "유효하지 않은 티켓을 요청하였습니다"));
-        ticket.updateTicket(request.getTicketName(), request.getTicketContent());
+        ticket.updateTicketInfo(request.getTicketName(), request.getTicketContent());
         ticketRepository.save(ticket);
     }
 }
