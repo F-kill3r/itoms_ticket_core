@@ -1,7 +1,7 @@
 package com.capston_design.fkiller.itoms.ticket_core.domain.entity;
 
 
-import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.aspect.UpdateTicketStatusAspect;
+import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.aspect.UpdateTicketStatusAspect;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 

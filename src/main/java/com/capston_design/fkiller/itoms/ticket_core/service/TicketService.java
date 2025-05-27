@@ -4,26 +4,28 @@ import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.Assig
 import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.UpdateTicketStatus;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignmentCallbackDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.completeTaskRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
 import com.capston_design.fkiller.itoms.ticket_core.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
-import static com.capston_design.fkiller.itoms.ticket_core.common.exception.BaseException.createBaseExceptionWithDetail;
 import static com.capston_design.fkiller.itoms.ticket_core.common.exception.BaseException.createBaseExceptionWithoutDetail;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class TicketService {
 
     private final TicketRepository ticketRepository;
-
 
     @UpdateTicketStatus(ticketStatus = TicketStatus.REQUEST_CREATE_TICKET)
     @Transactional
@@ -59,5 +61,16 @@ public class TicketService {
         ticket.updateCreator(dto.getCreatorId(), dto.getCreatorName());
 
         ticketRepository.save(ticket);
+    }
+
+    @UpdateTicketStatus(ticketStatus = TicketStatus.COMPLETE_TASK, taskNotification = true)
+    @Transactional
+    public Ticket completeTask(UUID taskId, completeTaskRequestDTO request, String clock) {
+
+        log.info("[태스크 완료 요청] - taskId={}, taskId={}, taskName={} [request time] - {}", request.getTicketId(),
+                taskId, request.getTaskName(), clock);
+        return ticketRepository.findById(request.getTicketId())
+                .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
+                        "유효하지 않은 티켓을 요청하였습니다"));
     }
 }
