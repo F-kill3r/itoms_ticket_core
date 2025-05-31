@@ -19,6 +19,9 @@ public class Ticket extends BaseEntity {
     @Column(name = "ticket_id")
     private UUID id;
 
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
+
     @Column(name = "incident_id", nullable = false)
     private String incidentId;
 
@@ -72,11 +75,12 @@ public class Ticket extends BaseEntity {
     private String acceptorName;
 
     @Builder(toBuilder = true)
-    public Ticket(String incidentId, String closedAt, LocalDateTime acceptedAt, LocalDateTime ticketPlanStartDate,
+    public Ticket(String incidentId, boolean isDeleted, String closedAt, LocalDateTime acceptedAt, LocalDateTime ticketPlanStartDate,
                   LocalDateTime ticketPlanEndDate, LocalDateTime ticketPlanDuration, TicketStatus ticketStatus,
                   int ticketStatusCode, String ticketName, String ticketContent, boolean ticketActive, String creatorId,
                   String creatorName, String requesterId, String requesterName, String acceptorId, String acceptorName) {
 
+        this.isDeleted = isDeleted;
         this.incidentId = incidentId;
         this.closedAt = closedAt;
         this.acceptedAt = acceptedAt;
@@ -98,6 +102,7 @@ public class Ticket extends BaseEntity {
 
     public static Ticket ofCreateBaseTicket(String incidentId, String requesterId, String requesterName){
         return Ticket.builder()
+                .isDeleted(false)
                 .incidentId(incidentId)
                 .requesterId(requesterId)
                 .requesterName(requesterName)

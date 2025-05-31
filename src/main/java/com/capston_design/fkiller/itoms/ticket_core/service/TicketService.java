@@ -31,7 +31,6 @@ public class TicketService {
                 request.getRequester().getRequesterId(),
                 request.getRequester().getRequesterName());
         //TODO: AI에 Creator 할당 요청
-
         return ticketRepository.save(initTicket).getId();
     }
 
@@ -55,21 +54,9 @@ public class TicketService {
                 .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
                         "유효하지 않은 티켓을 요청하였습니다"));
         ticket.updateCreator(dto.getCreatorId(), dto.getCreatorName());
-
         ticketRepository.save(ticket);
     }
 
-    @UpdateTicketStatus(ticketStatus = TicketStatus.COMPLETE_TASK, taskNotification = true)
-    @Transactional
-    public Ticket completeTask(UUID taskId, completeTaskRequestDTO request, String clock) {
-
-        log.info("[태스크 완료 요청] - taskId={}, taskId={}, taskName={} [request time] - {}", request.getTicketId(),
-                taskId, request.getTaskName(), clock);
-        return ticketRepository.findById(request.getTicketId())
-                .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
-                        "유효하지 않은 티켓을 요청하였습니다"));
-    }
-    // Todo: Status 추가
     @Transactional
     public void updateTicketInfo(UUID ticketId, UpdateTicketInfoRequestDTO request) {
         Ticket ticket = ticketRepository.findById(ticketId)

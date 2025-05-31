@@ -5,6 +5,7 @@ import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.Creat
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.UpdateTicketInfoRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/ticket-core")
+@RequiredArgsConstructor
 public class TicketController {
 
     private final TicketService ticketService;
-
-    public TicketController(TicketService ticketService) {
-        this.ticketService = ticketService;
-    }
 
     //TODO: 전역 Response 응답타입 정의
     @PostMapping("/v1/ticket")
@@ -28,18 +26,19 @@ public class TicketController {
     }
     @PatchMapping("/v1/ticket/{ticketId}/assign")
     public ResponseEntity<Void> assignAcceptor(
-            @PathVariable UUID id,
+            @PathVariable UUID ticketId,
             @RequestBody AssignAcceptorRequestDTO request
     ) {
-        ticketService.assignAcceptor(id, request);
+        ticketService.assignAcceptor(ticketId, request);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/v1/ticket/{ticketId}")
     public ResponseEntity<Void> updateTicket(
-            @PathVariable UUID id,
+            @PathVariable UUID ticketId,
             @RequestBody UpdateTicketInfoRequestDTO request
     ) {
-        ticketService.updateTicketInfo(id, request);
+        ticketService.updateTicketInfo(ticketId, request);
         return ResponseEntity.ok().build();
     }
+
 }

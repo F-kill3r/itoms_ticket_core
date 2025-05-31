@@ -15,6 +15,17 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: ${LOGGER_LEVEL}
+          incident:
+            url: ${INCIDENT_URL}
+          service-request-management-client:
+            url: ${SERVICE_REQUEST_MANAGEMENT_URL}
+
 springdoc:
   swagger-ui:
     path: ${SWAGGER_PATH}/swagger-ui.html
