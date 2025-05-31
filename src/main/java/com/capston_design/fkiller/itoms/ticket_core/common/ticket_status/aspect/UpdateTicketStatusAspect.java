@@ -29,15 +29,6 @@ public class UpdateTicketStatusAspect {
         });
     }
 
-    @AfterReturning(pointcut = "@annotation(updateTicketStatus)", returning = "result")
-    public void afterReturningMethod(UpdateTicketStatus updateTicketStatus, Object result){
-        if(updateTicketStatus.taskNotification()){
-            Ticket ticket = (Ticket) result;
-            ticket.updateTicketStatus(updateTicketStatus.ticketStatus());
-            statusHolder.remove();
-        }
-    }
-
     public static TicketStatus getStatus() {
         return statusHolder.get();
     }
