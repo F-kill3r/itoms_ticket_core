@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TicketRepository extends JpaRepository<Ticket, UUID> {
-    List<Ticket> findByAcceptorId(String acceptorId);;
+    List<Ticket> findTicketsByAcceptorId(String acceptorId);;
 }

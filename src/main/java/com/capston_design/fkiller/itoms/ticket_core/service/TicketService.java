@@ -69,8 +69,8 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
-    public List<TicketInfoResponseDTO> findByAcceptorId(String acceptorId) {
-        List<Ticket> tickets = ticketRepository.findByAcceptorId(acceptorId);
+    public List<TicketInfoResponseDTO> findTicketsByAcceptorId(String acceptorId) {
+        List<Ticket> tickets = ticketRepository.findTicketsByAcceptorId(acceptorId);
         return tickets.stream()
                 .map(TicketInfoResponseDTO::from)
                 .collect(Collectors.toList());

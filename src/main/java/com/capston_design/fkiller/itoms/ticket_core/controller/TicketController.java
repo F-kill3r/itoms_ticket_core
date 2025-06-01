@@ -43,19 +43,10 @@ public class TicketController {
         ticketService.updateTicketInfo(ticketId, request);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/v1/acceptorId")
-    public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByAcceptor(
-            @RequestParam("acceptorId") String acceptorId) {
-
-        List<TicketInfoResponseDTO> tickets = ticketService.findByAcceptorId(acceptorId);
-        return ResponseEntity.ok(tickets);
-    }
-
-    @PostMapping("/v1/assigned")
-    public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByChargerId(
+    @PostMapping("v1/tickets/by-acceptor")
+    public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByAcceptorId(
             @RequestBody TicketInfoRequestDTO request) {
-
-        List<TicketInfoResponseDTO> tickets = ticketService.findByAcceptorId(request.getChargerId());
+        List<TicketInfoResponseDTO> tickets = ticketService.findTicketsByAcceptorId(request.getAcceptorId());
         return ResponseEntity.ok(tickets);
     }
 }

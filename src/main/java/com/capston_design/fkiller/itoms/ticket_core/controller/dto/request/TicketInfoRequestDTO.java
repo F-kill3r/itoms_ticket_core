@@ -5,5 +5,5 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class TicketInfoRequestDTO {
-    private String chargerId;
+    private String acceptorId;
 }
