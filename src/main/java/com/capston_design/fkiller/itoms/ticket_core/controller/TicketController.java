@@ -43,7 +43,7 @@ public class TicketController {
         ticketService.updateTicketInfo(ticketId, request);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/v1/tickets")
+    @GetMapping("/v1/acceptorId")
     public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByAcceptor(
             @RequestParam("acceptorId") String acceptorId) {
 
