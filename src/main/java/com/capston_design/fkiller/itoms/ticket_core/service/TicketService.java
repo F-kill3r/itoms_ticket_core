@@ -37,7 +37,7 @@ public class TicketService {
         return ticketRepository.save(initTicket).getId();
     }
 
-    @UpdateTicketStatus(ticketStatus = TicketStatus.COMPLETE_ASSIGN_ACCEPTOR)
+    @UpdateTicketStatus(ticketStatus = TicketStatus.PENDING_EXECUTION)
     @Transactional
     public void assignAcceptor(UUID ticketId, AssignAcceptorRequestDTO dto) {
         Ticket ticket = ticketRepository.findById(ticketId)

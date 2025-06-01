@@ -6,7 +6,12 @@ spring:
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: ${DDL_ENV}
     open-in-view: true
@@ -15,6 +20,8 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
+
+
   cloud:
     openfeign:
       client:
