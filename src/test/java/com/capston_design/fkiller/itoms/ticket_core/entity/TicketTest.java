@@ -3,13 +3,16 @@ package com.capston_design.fkiller.itoms.ticket_core.entity;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
 import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TicketTest {
 
     @Test
     void 초기화_티켓_생성() {
-        String incident_id = "test_incident_id";
+        UUID incident_id = UUID.randomUUID();
         String requester_id = "test_requester_id";
         String requester_name = "test_requester_name";
         TicketStatus ticketStatus = TicketStatus.REQUEST_CREATE_TICKET;

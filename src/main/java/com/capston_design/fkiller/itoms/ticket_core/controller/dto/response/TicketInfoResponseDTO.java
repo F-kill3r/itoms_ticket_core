@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class TicketInfoResponseDTO {
-    private String incidentId;
+    private UUID incidentId;
     private UUID ticketId;
     private String creatorId;
     private String creatorName;

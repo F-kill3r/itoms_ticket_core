@@ -23,7 +23,7 @@ public class Ticket extends BaseEntity {
     private boolean isDeleted;
 
     @Column(name = "incident_id", nullable = false)
-    private String incidentId;
+    private UUID incidentId;
 
     @Column(name = "closed_at")
     private String closedAt;
@@ -75,7 +75,7 @@ public class Ticket extends BaseEntity {
     private String acceptorName;
 
     @Builder(toBuilder = true)
-    public Ticket(String incidentId, boolean isDeleted, String closedAt, LocalDateTime acceptedAt, LocalDateTime ticketPlanStartDate,
+    public Ticket(UUID incidentId, boolean isDeleted, String closedAt, LocalDateTime acceptedAt, LocalDateTime ticketPlanStartDate,
                   LocalDateTime ticketPlanEndDate, LocalDateTime ticketPlanDuration, TicketStatus ticketStatus,
                   int ticketStatusCode, String ticketName, String ticketContent, boolean ticketActive, String creatorId,
                   String creatorName, String requesterId, String requesterName, String acceptorId, String acceptorName) {
@@ -100,7 +100,7 @@ public class Ticket extends BaseEntity {
         this.acceptorName = acceptorName;
     }
 
-    public static Ticket ofCreateBaseTicket(String incidentId, String requesterId, String requesterName){
+    public static Ticket ofCreateBaseTicket(UUID incidentId, String requesterId, String requesterName){
         return Ticket.builder()
                 .isDeleted(false)
                 .incidentId(incidentId)
