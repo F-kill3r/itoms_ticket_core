@@ -2,13 +2,16 @@ package com.capston_design.fkiller.itoms.ticket_core.controller;
 
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.TicketInfoRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.UpdateTicketInfoRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.TicketInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -40,5 +43,10 @@ public class TicketController {
         ticketService.updateTicketInfo(ticketId, request);
         return ResponseEntity.ok().build();
     }
-
+    @PostMapping("v1/tickets/by-acceptor")
+    public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByAcceptorId(
+            @RequestBody TicketInfoRequestDTO request) {
+        List<TicketInfoResponseDTO> tickets = ticketService.findTicketsByAcceptorId(request.getAcceptorId());
+        return ResponseEntity.ok(tickets);
+    }
 }

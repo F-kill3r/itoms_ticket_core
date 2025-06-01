@@ -2,6 +2,7 @@ package com.capston_design.fkiller.itoms.ticket_core.service;
 
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.*;
 import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.UpdateTicketStatus;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.TicketInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
 import com.capston_design.fkiller.itoms.ticket_core.repository.TicketRepository;
@@ -11,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.capston_design.fkiller.itoms.ticket_core.common.exception.BaseException.createBaseExceptionWithoutDetail;
 
@@ -64,5 +67,12 @@ public class TicketService {
                         "유효하지 않은 티켓을 요청하였습니다"));
         ticket.updateTicketInfo(request.getTicketName(), request.getTicketContent());
         ticketRepository.save(ticket);
+    }
+
+    public List<TicketInfoResponseDTO> findTicketsByAcceptorId(String acceptorId) {
+        List<Ticket> tickets = ticketRepository.findTicketsByAcceptorId(acceptorId);
+        return tickets.stream()
+                .map(TicketInfoResponseDTO::from)
+                .collect(Collectors.toList());
     }
 }
