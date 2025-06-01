@@ -2,13 +2,16 @@ package com.capston_design.fkiller.itoms.ticket_core.controller;
 
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.AssignAcceptorRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.CreateTicketRequestDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.TicketInfoRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.UpdateTicketInfoRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
+import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.TicketInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -40,5 +43,19 @@ public class TicketController {
         ticketService.updateTicketInfo(ticketId, request);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/v1/tickets")
+    public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByAcceptor(
+            @RequestParam("acceptorId") String acceptorId) {
 
+        List<TicketInfoResponseDTO> tickets = ticketService.findByAcceptorId(acceptorId);
+        return ResponseEntity.ok(tickets);
+    }
+
+    @PostMapping("/v1/assigned")
+    public ResponseEntity<List<TicketInfoResponseDTO>> getTicketsByChargerId(
+            @RequestBody TicketInfoRequestDTO request) {
+
+        List<TicketInfoResponseDTO> tickets = ticketService.findByAcceptorId(request.getChargerId());
+        return ResponseEntity.ok(tickets);
+    }
 }

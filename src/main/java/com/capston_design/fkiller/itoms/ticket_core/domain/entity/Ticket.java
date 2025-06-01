@@ -44,7 +44,7 @@ public class Ticket extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TicketStatus ticketStatus;
 
-    @Column(name = "ticket_tatus_code", nullable = false)
+    @Column(name = "ticket_status_code", nullable = false)
     private int ticketStatusCode;
 
     @Column(name = "ticket_name")
