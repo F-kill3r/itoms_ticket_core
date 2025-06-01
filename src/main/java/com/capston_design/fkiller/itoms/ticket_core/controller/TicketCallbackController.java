@@ -12,12 +12,11 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/callback")
+@RequestMapping("api/ticket-core/callback")
 @RequiredArgsConstructor
 public class TicketCallbackController
 {
     private final TicketService ticketService;
-    private final ClockHolder clockHolder;
 
     @PostMapping("/assign-handler")
     public ResponseEntity<Void> handleAssigneeUpdate(@RequestBody AssignmentCallbackDTO dto) {

@@ -5,10 +5,13 @@ import lombok.Getter;
 @Getter
 public enum TicketStatus {
     REQUEST_CREATE_TICKET(1, "REQUEST", "티켓 생성 요청 상태"),
-    COMPLETE_ASSIGN_ACCEPTOR(2, "ASSIGNED", "작업자 할당 완료 상태"),
-    COMPLETE_ASSIGN_CREATOR(3, "CREATED", "티켓 담당자 할당 완료 상태"),
-    COMPLETE_TASK(5, "IN_PROGRESS", "작업자 특정 작업(Task) 완료 상태");
-
+    COMPLETE_ASSIGN_CREATOR(2, "CREATED", "티켓 담당자 할당 완료 상태"),
+    PENDING_EXECUTION(3, "PENDING_EXECUTION", "승인 대기 상태(작업자가 티켓 업무를 수행하기 전 대기 상태)"),
+    DEACTIVATE_EXECUTION(4, "NOT_STARTED_EXECUTION", "승인은 완료했으나 과업 수행 시작 전 상태(planStartDate 전인 경우)"),
+    ACTIVATE_EXECUTION(5, "IN_PROGRESS", "작업자가 작업 진행 중 상태"),
+    COMPLETE_EXECUTION(6, "COMPLETE_EXECUTION", "전체 과업이 완료되어, 해당 티켓의 수행이 종료 상태"),
+    CANCEL_EXECUTION(7, "REJECTED", "작업자가 티켓 수행 불가로 반려한 상태"),
+    PAUSED_EXECUTION(9, "HOLD_ON", "작업자가 티켓 수행을 일시 중지한 상태");
     private int code;
     private String codeName;
     private String description;
