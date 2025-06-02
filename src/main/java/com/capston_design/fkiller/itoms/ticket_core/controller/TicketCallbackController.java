@@ -18,16 +18,16 @@ public class TicketCallbackController
 {
     private final TicketService ticketService;
 
-    @PostMapping("/assign-handler")
+    @PostMapping("/v1/assign-handler")
     public ResponseEntity<Void> handleAssigneeUpdate(@RequestBody AssignmentCallbackDTO dto) {
         ticketService.assignHandler(dto);
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/task/{taskId}/complete")
+    @PostMapping("/v1/task/{taskId}/complete")
     public ResponseEntity<Void> completeTask(@PathVariable UUID taskId, @RequestBody completeTaskRequestDTO request) {
-        log.info("[태스크 완료 요청] - taskId={}, taskId={}, taskName={} [request time] - {}", request.getTicketId(),
-                taskId, request.getTaskName(), request.getCompletionTime());
+        log.info("[태스크 완료 요청] - taskId={}, ticketId={}, taskName={}, taskNowStatus={}, [request time] - {}", request.getTicketId(),
+                taskId, request.getTaskName(), request.getTaskStatus(), request.getCompletionTime());
         return ResponseEntity.noContent().build();
     }
 }

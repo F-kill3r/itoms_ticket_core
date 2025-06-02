@@ -10,5 +10,6 @@ import java.util.UUID;
 public class completeTaskRequestDTO {
     private UUID ticketId;
     private String taskName;
+    private String taskStatus;
     private String completionTime;
 }
