@@ -1,6 +1,8 @@
 package com.capston_design.fkiller.itoms.ticket_core.domain.entity;
 
+import com.capston_design.fkiller.itoms.ticket_core.common.exception.BaseException;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public enum TicketStatus {
@@ -20,5 +22,15 @@ public enum TicketStatus {
         this.code = code;
         this.codeName = codeName;
         this.description = description;
+    }
+
+    public static TicketStatus fromCodeName(String ticketStatus) {
+        for (TicketStatus status : TicketStatus.values()) {
+            if (status.getCodeName().equals(ticketStatus)) {
+                return status;
+            }
+        }
+        throw BaseException.createBaseExceptionWithoutDetail(
+                HttpStatus.BAD_REQUEST, "정의되지 않은 TicketStatus 코드명입니다.");
     }
 }

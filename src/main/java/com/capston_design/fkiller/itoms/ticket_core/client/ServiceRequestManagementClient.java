@@ -1,4 +1,4 @@
-package com.capston_design.fkiller.itoms.ticket_core.client.config;
+package com.capston_design.fkiller.itoms.ticket_core.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 

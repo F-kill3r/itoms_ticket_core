@@ -26,7 +26,7 @@ public class Ticket extends BaseEntity {
     private UUID incidentId;
 
     @Column(name = "closed_at")
-    private String closedAt;
+    private LocalDateTime closedAt;
 
     @Column(name = "accepted_at")
     private LocalDateTime acceptedAt;
@@ -125,5 +125,10 @@ public class Ticket extends BaseEntity {
     public void updateTicketInfo(String name, String content) {
         this.ticketName = name;
         this.ticketContent = content;
+    }
+    
+    public void markClosedAt(LocalDateTime closedAt) {
+        this.closedAt = closedAt;
+        this.ticketActive = false;
     }
 }
