@@ -1,11 +1,14 @@
 package com.capston_design.fkiller.itoms.ticket_core.service;
 
+import com.capston_design.fkiller.itoms.ticket_core.common.util.ClockUtils;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.*;
 import com.capston_design.fkiller.itoms.ticket_core.common.ticket_status.annotation.UpdateTicketStatus;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.TicketInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.Ticket;
 import com.capston_design.fkiller.itoms.ticket_core.domain.entity.TicketStatus;
 import com.capston_design.fkiller.itoms.ticket_core.repository.TicketRepository;
+import com.capston_design.fkiller.itoms.ticket_core.service.dto.error.TicketCompletedEvent;
+import com.capston_design.fkiller.itoms.ticket_core.service.event.RestTicketEventListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,6 +27,7 @@ import static com.capston_design.fkiller.itoms.ticket_core.common.exception.Base
 @RequiredArgsConstructor
 public class TicketService {
 
+    private final RestTicketEventListener restTicketEventListener;
     private final TicketRepository ticketRepository;
 
     @UpdateTicketStatus(ticketStatus = TicketStatus.REQUEST_CREATE_TICKET)
@@ -34,6 +38,7 @@ public class TicketService {
                 request.getRequester().getRequesterId(),
                 request.getRequester().getRequesterName());
         //TODO: AI에 Creator 할당 요청
+        //TODO: random Creator ID 할당 요청
         return ticketRepository.save(initTicket).getId();
     }
 
@@ -74,5 +79,21 @@ public class TicketService {
         return tickets.stream()
                 .map(TicketInfoResponseDTO::from)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void updateTicketStatus(completeTicketRequestDTO request) {
+        Ticket ticket = ticketRepository.findById(request.getTicketId())
+                .orElseThrow(() -> createBaseExceptionWithoutDetail(
+                        HttpStatus.BAD_REQUEST,"유효하지 않은 티켓을 요청하였습니다"));
+        ticket.updateTicketStatus(TicketStatus.fromCodeName(request.getTicketStatus()));
+        ticket.markClosedAt(ClockUtils.parseToLocalDateTime(request.getCompletionTime()));
+        ticketRepository.save(ticket);
+        restTicketEventListener.handleTicketCompletedEvent(
+                new TicketCompletedEvent(ticket.getId(), ticket.getIncidentId())
+        );
+
+        log.info("[티켓 완료 요청] - ticketId={}, ticketName={}, ticketNowStatus={}, [request time] - {}",
+                request.getTicketId(), request.getTicketName(), request.getTicketStatus(), request.getCompletionTime());
     }
 }
