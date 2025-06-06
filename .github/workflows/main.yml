@@ -27,4 +27,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push fkiller14800/itoms_ticket_corek:latest
+          docker push fkiller14800/itoms_ticket_core:latest
