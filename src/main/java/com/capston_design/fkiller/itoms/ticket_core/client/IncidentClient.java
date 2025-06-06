@@ -10,6 +10,6 @@ public interface IncidentClient {
     // TODO: Incident api 완료되면 구현
 
     // url path는 추후 변경예
-    //@PostMapping("/v1/ticket/complete")
+    @PostMapping("/v1/ticket/complete")
     void completeTicket(@RequestBody TicketCompletedRequestDTO requestDTO);
 }

@@ -11,7 +11,7 @@ import java.util.UUID;
 @Entity
 @EntityListeners(TicketEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "TICKET")
+@Table(name = "ticket")
 public class Ticket extends BaseEntity {
 
     @Id
