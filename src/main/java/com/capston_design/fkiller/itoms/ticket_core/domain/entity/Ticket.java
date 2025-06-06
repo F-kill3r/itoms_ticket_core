@@ -75,7 +75,7 @@ public class Ticket extends BaseEntity {
     private String acceptorName;
 
     @Builder(toBuilder = true)
-    public Ticket(UUID incidentId, boolean isDeleted, String closedAt, LocalDateTime acceptedAt, LocalDateTime ticketPlanStartDate,
+    public Ticket(UUID incidentId, boolean isDeleted, LocalDateTime closedAt, LocalDateTime acceptedAt, LocalDateTime ticketPlanStartDate,
                   LocalDateTime ticketPlanEndDate, LocalDateTime ticketPlanDuration, TicketStatus ticketStatus,
                   int ticketStatusCode, String ticketName, String ticketContent, boolean ticketActive, String creatorId,
                   String creatorName, String requesterId, String requesterName, String acceptorId, String acceptorName) {
