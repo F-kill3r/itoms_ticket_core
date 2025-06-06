@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build and Push Docker Image
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux, x64]
 
     steps:
       - name: Checkout
@@ -27,4 +27,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push fkiller14800/itoms_ticket_core:latest
+          docker push fkiller14800/itoms_ticket_corek:latest
