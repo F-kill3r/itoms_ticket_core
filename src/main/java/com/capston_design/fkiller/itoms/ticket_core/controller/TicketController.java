@@ -35,6 +35,13 @@ public class TicketController {
         ticketService.assignAcceptor(ticketId, request);
         return ResponseEntity.ok().build();
     }
+    @PatchMapping("/v1/ticket/{ticketId}/random-assign")
+    public ResponseEntity<Void> assignRandomAcceptor(
+            @PathVariable UUID ticketId
+    ) {
+        ticketService.assignAcceptor(ticketId);
+        return ResponseEntity.ok().build();
+    }
     @PatchMapping("/v1/ticket/{ticketId}")
     public ResponseEntity<Void> updateTicket(
             @PathVariable UUID ticketId,

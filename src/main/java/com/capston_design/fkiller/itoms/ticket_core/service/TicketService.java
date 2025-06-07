@@ -2,6 +2,7 @@ package com.capston_design.fkiller.itoms.ticket_core.service;
 
 import com.capston_design.fkiller.itoms.ticket_core.client.IncidentClient;
 import com.capston_design.fkiller.itoms.ticket_core.client.UserServiceClient;
+import com.capston_design.fkiller.itoms.ticket_core.client.dto.response.AcceptorInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.client.dto.response.CreatorInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.common.util.ClockUtils;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.*;
@@ -48,7 +49,24 @@ public class TicketService {
 
         return ticketRepository.save(initTicket).getId();
     }
+    // 임시로 작업자 랜덤 할당 test code
+    @UpdateTicketStatus(ticketStatus = TicketStatus.PENDING_EXECUTION)
+    @Transactional
+    public void assignAcceptor(UUID ticketId) {
+        // 티켓 조회
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST,
+                        "유효하지 않은 티켓을 요청하였습니다"));
 
+        // 랜덤 작업자 할당
+        AcceptorInfoResponseDTO randomChargerInfo = userServiceClient.getRandomChargerInfo().getResult();
+        ticket.updateAcceptor(randomChargerInfo.getId(), randomChargerInfo.getName());
+
+        // 저장
+        ticketRepository.save(ticket);
+    }
+
+    // 실제 담당자가 작업자 할당 시 사용 코드
     @UpdateTicketStatus(ticketStatus = TicketStatus.PENDING_EXECUTION)
     @Transactional
     public void assignAcceptor(UUID ticketId, AssignAcceptorRequestDTO dto) {
