@@ -11,5 +11,4 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CreateTicketResponseDTO {
     private UUID ticketId;
-    private UUID incidentId;
 }

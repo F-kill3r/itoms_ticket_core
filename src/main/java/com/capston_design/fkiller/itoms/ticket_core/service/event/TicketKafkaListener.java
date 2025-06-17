@@ -28,7 +28,7 @@ public class TicketKafkaListener {
     public void handleCreateTicket(CreateTicketRequestDTO request) {
         log.info("[Kafka] create ticket request received. incidentId={}", request.getIncidentId());
         UUID ticketId = ticketService.createTicket(request);
-        CreateTicketResponseDTO response = new CreateTicketResponseDTO(ticketId, request.getIncidentId());
+        CreateTicketResponseDTO response = new CreateTicketResponseDTO(ticketId);
         kafkaTemplate.send(ticketResponseTopic, request.getIncidentId().toString(), response);
         log.info("[Kafka] create ticket response sent. incidentId={}, ticketId={}", request.getIncidentId(), ticketId);
     }
