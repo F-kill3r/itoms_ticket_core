@@ -32,6 +32,8 @@ spring:
             url: ${INCIDENT_URL}
           service-request-management-client:
             url: ${SERVICE_REQUEST_MANAGEMENT_URL}
+          user-service:
+            url: ${USER_SERVICE_URL}
 
 springdoc:
   swagger-ui:

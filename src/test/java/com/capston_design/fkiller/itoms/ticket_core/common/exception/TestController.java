@@ -12,13 +12,13 @@ import static com.capston_design.fkiller.itoms.ticket_core.common.exception.Base
 @Controller
 public class TestController {
 
-    @GetMapping("/test/exception")
-    public ResponseEntity<Void> testException() {
-        throw createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST, "예외 발생");
-    }
-
-    @GetMapping("/test/exception/detail")
-    public ResponseEntity<Void> testExceptionWithDetail() {
-        throw createBaseExceptionWithDetail(HttpStatus.BAD_REQUEST, "예외 발생", new DetailErrorDTO("12", "티켓 전송 중 오류 발생"));
-    }
+//    @GetMapping("/test/exception")
+//    public ResponseEntity<Void> testException() {
+//        throw createBaseExceptionWithoutDetail(HttpStatus.BAD_REQUEST, "예외 발생");
+//    }
+//
+//    @GetMapping("/test/exception/detail")
+//    public ResponseEntity<Void> testExceptionWithDetail() {
+//        throw createBaseExceptionWithDetail(HttpStatus.BAD_REQUEST, "예외 발생", new DetailErrorDTO("12", "티켓 전송 중 오류 발생"));
+//    }
 }
