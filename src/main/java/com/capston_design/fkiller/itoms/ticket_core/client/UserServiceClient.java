@@ -6,9 +6,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(name = "user-service", url = "http://localhost:8083/api/user")
+@FeignClient(name = "user-service", url = "${USER_SERVICE_URL}")
 public interface UserServiceClient {
 
-    @GetMapping("/randomCreator")
+    @GetMapping("/api/user/randomMember")
     CommonResponse<CreatorInfoResponseDTO> getRandomCreatorInfo();
 }
