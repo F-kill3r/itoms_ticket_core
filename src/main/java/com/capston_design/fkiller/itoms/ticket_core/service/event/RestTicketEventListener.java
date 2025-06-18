@@ -1,6 +1,6 @@
 package com.capston_design.fkiller.itoms.ticket_core.service.event;
 
-import com.capston_design.fkiller.itoms.ticket_core.client.IncidentClient;
+import com.capston_design.fkiller.itoms.ticket_core.client.rest.IncidentClient;
 import com.capston_design.fkiller.itoms.ticket_core.client.dto.TicketCompletedRequestDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.dto.error.TicketCompletedEvent;
 import lombok.RequiredArgsConstructor;

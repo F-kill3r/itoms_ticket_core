@@ -20,6 +20,17 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
+  grpc:
+    server:
+      port: ${GRPC_PORT}
+    client:
+      incident:
+        host: ${INCIDENT_HOST}
+        port: ${INCIDENT_PORT}
+      user:
+        host: ${USER_HOST}
+        port: ${USER_PORT}
+
 
 
   cloud:

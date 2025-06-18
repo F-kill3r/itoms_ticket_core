@@ -1,4 +1,4 @@
-package com.capston_design.fkiller.itoms.ticket_core.client;
+package com.capston_design.fkiller.itoms.ticket_core.client.rest;
 
 import com.capston_design.fkiller.itoms.ticket_core.client.dto.TicketCompletedRequestDTO;
 import org.springframework.cloud.openfeign.FeignClient;

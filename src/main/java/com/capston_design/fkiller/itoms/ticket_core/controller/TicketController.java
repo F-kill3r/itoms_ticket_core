@@ -7,6 +7,7 @@ import com.capston_design.fkiller.itoms.ticket_core.controller.dto.request.Updat
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.CreateTicketResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.controller.dto.response.TicketInfoResponseDTO;
 import com.capston_design.fkiller.itoms.ticket_core.service.TicketService;
+import com.capston_design.fkiller.itoms.ticket_core.service.TicketServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
