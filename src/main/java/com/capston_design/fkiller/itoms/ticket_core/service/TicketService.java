@@ -27,7 +27,7 @@ import static com.capston_design.fkiller.itoms.ticket_core.common.exception.Base
 
 @Slf4j
 @Service
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class TicketService {
 
